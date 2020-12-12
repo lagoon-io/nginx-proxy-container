@@ -1,0 +1,32 @@
+version: '3'
+services:
+  nginx-proxy:
+    container_name: proxy
+    build: ./proxy/
+    environment:
+      # 特に必要ないが設定(参考)
+      TZ: "Asia/Tokyo"
+    # systemctlの有効化
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - "4443:4443"
+      - "8080:8080"
+      - "22011:22"
+    # volumes:
+    #   - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    networks:
+      default:
+        aliases:
+          - nginx-proxy.com
+  test:
+    container_name: test
+    image: centos:7
+    tty: true
+    networks:
+      default:
+networks:
+  default:
