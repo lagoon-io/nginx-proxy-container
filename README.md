@@ -1,5 +1,7 @@
 # nginx-proxy-container
 
+nginx proxy 機能をコンテナで実装するためのサンプル。
+
 ## setup
 
 ```
